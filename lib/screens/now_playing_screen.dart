@@ -31,7 +31,10 @@ String _bpmAt(TempoMap m, double pos) {
 }
 
 class NowPlayingScreen extends StatelessWidget {
-  const NowPlayingScreen({super.key});
+  const NowPlayingScreen({super.key, this.extraActions = const []});
+
+  /// App-specific app-bar buttons, e.g. a "Play on…" output picker.
+  final List<Widget> extraActions;
 
   @override
   Widget build(BuildContext context) {
@@ -42,6 +45,7 @@ class NowPlayingScreen extends StatelessWidget {
       appBar: AppBar(
         title: const Text('Now playing'),
         actions: [
+          ...extraActions,
           const SleepTimerButton(),
           if (path != null)
             IconButton(
